@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Program {{ program_data.id }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        /* Text wrapping for <pre> elements */
+        pre {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;     /* Preserve formatting, allow wrapping */
+            overflow-wrap: break-word; /* Break long words */
+        }
+        /* Text wrapping for list elements */
+        li {
+            overflow-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1>Program ID: {{ program_data.id }}</h1>
+    <ul>
+        <li><strong>Checkpoint:</strong> {{checkpoint_dir}}</li>
+        <li><strong>Island:</strong> {{ program_data.island }}</li>
+        <li><strong>Generation:</strong> {{ program_data.generation }}</li>
+        <li><strong>Parent ID:</strong> {{ program_data.parent_id or 'None' }}</li>
+        <li><strong>Metrics:</strong>
+            <ul>
+                {% for key, value in program_data.metrics.items() %}
+                    <li><strong>{{ key }}:</strong> {{ value }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% if program_data.metadata %}
+        <li><strong>Insights:</strong>
+            <ul>
+                <li><strong>Problem Insight:</strong> {{ program_data.metadata.get("problem_insight") or "None" }}</li>
+                <li><strong>Change Insight:</strong> {{ program_data.metadata.get("change_insight") or "None" }}</li>
+                <li><strong>Fitness Delta:</strong> {{ program_data.metadata.get("fitness_delta") if program_data.metadata.get("fitness_delta") is not none else "None" }}</li>
+            </ul>
+        </li>
+        {% endif %}
+        </ul>
+    <h2>Code:</h2>
+    <pre>{{ program_data.code }}</pre>
+    <h2>Prompts:</h2>
+    <ul>
+        {#-- recursive “display” macro --#}
+        {% macro display(val) %}
+        {% if val is mapping %}
+            <ul>
+            {% for k, v in val.items() %}
+                <li>
+                <strong>{{ k|e }}:</strong>
+                {{ display(v) }}
+                </li>
+            {% endfor %}
+            </ul>
+        {% elif val is sequence and not val is string %}
+            <ul>
+            {% for item in val %}
+                <li>{{ display(item) }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <pre>{{ val|e }}</pre>
+        {% endif %}
+        {% endmacro %}
+        {#-- loop over every prompts --#}
+        <div class="prompts">
+        {% for key, value in program_data.prompts.items() %}
+            <section>
+            <h3>{{ key|title }}</h3>
+            {{ display(value) }}
+            </section>
+        {% endfor %}
+        </div>
+    </ul>
+    {% if artifacts_json %}
+    <h2>Artifacts:</h2>
+    <pre id="artifacts-raw" style="white-space: pre-wrap; word-break: break-word;">{{ artifacts_json }}</pre>
+    <h2>Run Report:</h2>
+    <pre id="run-report" style="white-space: pre-wrap; word-break: break-word;">No run report available.</pre>
+    <script>
+        (function () {
+            const rawEl = document.getElementById('artifacts-raw');
+            const reportEl = document.getElementById('run-report');
+            if (!rawEl || !reportEl) return;
+            try {
+                const parsed = JSON.parse(rawEl.textContent || '{}');
+                if (parsed && parsed.run_report) {
+                    reportEl.textContent = JSON.stringify(parsed.run_report, null, 2);
+                }
+            } catch (err) {
+                // leave default text
+            }
+        })();
+    </script>
+    {% endif %}
+</body>
+</html>
