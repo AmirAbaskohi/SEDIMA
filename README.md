@@ -1,4 +1,4 @@
-# SEDIMA
+# SEDIMA (REALM@EMNLP 2026 Spotlight)
 
 <div align="center">
 
