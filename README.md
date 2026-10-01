@@ -138,4 +138,4 @@ SEDIMA is built on top of [OpenEvolve](https://github.com/algorithmicsuperintell
 
 ## License
 
-Apache License 2.0. See [LICENSE](LICENSE) for details.
+MIT. See [LICENSE](LICENSE) for details.
