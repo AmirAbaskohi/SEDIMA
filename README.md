@@ -122,13 +122,25 @@ openevolve-run.py       # CLI entry point
 If you use SEDIMA in your research, please cite:
 
 ```bibtex
-@inproceedings{
-abaskohi2026sedima,
-title={{SEDIMA}: Cross-Run Hierarchical Insight Memory for Evolutionary Search Agents},
-author={Amirhossein Abaskohi and Mahdi Mostajabdaveh and Zirui Zhou},
-booktitle={Second Workshop for Research on Agent Language Models},
-year={2026},
-url={https://openreview.net/forum?id=6hbm4tnWBl}
+@inproceedings{abaskohi-etal-2026-sedima,
+    title = "{SEDIMA}: Cross-Run Hierarchical Insight Memory for Evolutionary Search Agents",
+    author = "Abaskohi, Amirhossein  and
+      Mostajabdaveh, Mahdi  and
+      Zhou, Zirui",
+    editor = "Kamalloo, Ehsan  and
+      Gontier, Nicolas  and
+      Rozanov, Nikolai  and
+      Hashemzadeh, Maryam  and
+      Arora, Akhil",
+    booktitle = "Proceedings of the Second Workshop for {RE}search on Agent Language Models ({REALM} 2026)",
+    month = oct,
+    year = "2026",
+    address = "Budapest, Hungary",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.realm-1.62/",
+    pages = "903--921",
+    ISBN = "979-8-89176-485-9",
+    abstract = "Large language model (LLM)-driven evolutionary search is a powerful paradigm for automated program and algorithm discovery, yet existing systems are largely memoryless: each run explores from scratch, so agents repeatedly rediscover the same improvements and re-encounter the same dead ends. We introduce SEDIMA, a persistent hierarchical insight memory for evolutionary search agents. SEDIMA distills raw traces into natural-language insights, clusters them by semantic similarity using attention-weighted centroids, and retrieves relevant guidance to condition future mutations, accumulating transferable knowledge across runs and problems rather than within a single trajectory. As a drop-in module that leaves the search operators unmodified, SEDIMA improves average final performance by 5.5{\%} on AlgoTune and 6.6{\%} on ALE-Bench LITE under a fixed budget of 100 evaluated candidates. Under OpenEvolve, SEDIMA requires 32.3{\%} fewer iterations on average to reach baseline-best performance across the five evaluated backbones."
 }
 ```
 
