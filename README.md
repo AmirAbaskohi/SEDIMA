@@ -1,8 +1,10 @@
-# SEDIMA (REALM@EMNLP 2026 Spotlight)
-
 <div align="center">
 
-<img src="SEDIMA-method.png" alt="SEDIMA method overview" width="800">
+# SEDIMA (REALM@EMNLP 2026 Spotlight)
+
+[![paper](https://img.shields.io/badge/paper-ACL%20Anthology-b31b1b)](https://aclanthology.org/2026.realm-1.62/)
+
+<img src="SEDIMA-method.png" alt="SEDIMA method overview" width="100%">
 
 **Cross-Run Hierarchical Insight Memory for Evolutionary Search Agents**
 
